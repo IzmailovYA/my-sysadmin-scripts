@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Если аргумент передан, берем его. Если нет — неявно используем 5 секунд.
 N="${1:-5}"
 
 for i in $(seq 1 3); do
@@ -8,5 +7,6 @@ for i in $(seq 1 3); do
   free -h >> monitor.log
   df -h >> monitor.log
   uptime >> monitor.log
+  mpstat 1 1 | tail -n+4 >> monitor.log
   sleep "$N"
 done
